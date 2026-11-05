@@ -1,0 +1,400 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050907">
+<title>OMAR PROXY</title>
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: #050907;
+  color: white;
+  min-height: 100vh;
+}
+
+/* شاشة البداية */
+
+#intro {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background:
+    radial-gradient(circle at center, #183b28 0%, #09150e 45%, #020503 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transition: opacity 1s, visibility 1s;
+}
+
+#intro.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.brand {
+  font-family: Georgia, serif;
+  font-size: clamp(65px, 15vw, 115px);
+  font-weight: 900;
+  letter-spacing: 9px;
+  background: linear-gradient(
+    110deg,
+    #8a5a12,
+    #ffe9a0,
+    #d49a27,
+    #fff4bd,
+    #9c6a16
+  );
+  background-size: 300% auto;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  animation: shine 3s linear infinite, glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes shine {
+  to { background-position: 300% center; }
+}
+
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 8px #c18b25);
+  }
+  to {
+    filter: drop-shadow(0 0 25px #ffd45b)
+            drop-shadow(0 0 55px #b77b1c);
+  }
+}
+
+.intro-sub {
+  color: #e8c77c;
+  letter-spacing: 5px;
+  font-size: 12px;
+  margin-top: 15px;
+}
+
+.enter {
+  margin-top: 55px;
+  padding: 14px 45px;
+  border: 1px solid #d9ad50;
+  border-radius: 30px;
+  background: linear-gradient(120deg,#8c601b,#eac66e,#a87824);
+  color: #111;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 25px #c18b2555;
+}
+
+/* الواجهة */
+
+header {
+  text-align: center;
+  padding: 25px 10px;
+  background: linear-gradient(135deg,#10291c,#07110b);
+  border-bottom: 1px solid #b58b3d55;
+}
+
+header h1 {
+  color: #e8c77c;
+  font-family: Georgia, serif;
+  letter-spacing: 3px;
+  font-size: 29px;
+  text-shadow: 0 0 15px #c18b25;
+}
+
+header p {
+  color: #a9c5b2;
+  font-size: 12px;
+  margin-top: 8px;
+}
+
+main {
+  max-width: 950px;
+  margin: auto;
+  padding: 18px;
+}
+
+.search {
+  display: flex;
+  gap: 8px;
+  padding: 9px;
+  border: 1px solid #b58b3d77;
+  border-radius: 16px;
+  background: #101b14;
+  box-shadow: 0 0 20px #000;
+}
+
+.search input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  outline: none;
+  color: white;
+  padding: 10px;
+  font-size: 15px;
+}
+
+.search button {
+  background: linear-gradient(120deg,#a97924,#f0d28b);
+  border: 0;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+h2 {
+  font-size: 17px;
+  color: #e9ca80;
+  margin: 25px 2px 14px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 12px;
+}
+
+.tile {
+  text-decoration: none;
+  color: white;
+  background: linear-gradient(145deg,#14291d,#0b150f);
+  border: 1px solid #b58b3d44;
+  border-radius: 15px;
+  min-height: 95px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  transition: .25s;
+}
+
+.tile:hover {
+  border-color: #eac66e;
+  box-shadow: 0 0 17px #d2a64b44;
+  transform: translateY(-3px);
+}
+
+.emoji {
+  font-size: 27px;
+}
+
+.tile span:last-child {
+  font-size: 13px;
+}
+
+.browser {
+  margin-top: 25px;
+  border: 1px solid #b58b3d66;
+  border-radius: 15px;
+  overflow: hidden;
+  background: white;
+}
+
+.browserbar {
+  background: #101b14;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #e9ca80;
+}
+
+.browserbar button {
+  border: 1px solid #b58b3d;
+  background: #17251b;
+  color: white;
+  padding: 8px;
+  border-radius: 8px;
+}
+
+iframe {
+  width: 100%;
+  height: 500px;
+  border: 0;
+  background: white;
+}
+
+.notice {
+  margin-top: 15px;
+  padding: 14px;
+  background: #101b14;
+  border: 1px solid #b58b3d44;
+  border-radius: 12px;
+  color: #b9cbbf;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+footer {
+  text-align: center;
+  padding: 25px;
+  color: #b58b3d;
+  font-size: 11px;
+}
+
+@media(max-width:400px) {
+  .grid { gap: 8px; }
+  .tile { min-height: 85px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- شاشة البداية -->
+
+<div id="intro">
+  <div class="brand">OMAR</div>
+  <div class="intro-sub">REAL WEB EXPERIENCE</div>
+  <button class="enter" onclick="startSite()">دخول الموقع</button>
+</div>
+
+<header>
+  <h1>OMAR PROXY</h1>
+  <p>متصفح الإنترنت الخاص بك</p>
+</header>
+
+<main>
+
+<form class="search" id="searchForm">
+  <input id="address"
+  placeholder="ابحث في Google أو اكتب رابط الموقع...">
+  <button type="submit">بحث</button>
+</form>
+
+<h2>مواقع التواصل الاجتماعي</h2>
+
+<div class="grid">
+
+<a class="tile" href="https://web.whatsapp.com/" target="_blank">
+<span class="emoji">💬</span><span>واتساب</span></a>
+
+<a class="tile" href="https://facebook.com/" target="_blank">
+<span class="emoji">🔵</span><span>فيسبوك</span></a>
+
+<a class="tile" href="https://messenger.com/" target="_blank">
+<span class="emoji">✉️</span><span>ماسنجر</span></a>
+
+<a class="tile" href="https://instagram.com/" target="_blank">
+<span class="emoji">📸</span><span>إنستجرام</span></a>
+
+<a class="tile" href="https://tiktok.com/" target="_blank">
+<span class="emoji">🎵</span><span>تيك توك</span></a>
+
+<a class="tile" href="https://web.telegram.org/" target="_blank">
+<span class="emoji">✈️</span><span>تيليجرام</span></a>
+
+<a class="tile" href="https://youtube.com/" target="_blank">
+<span class="emoji">▶️</span><span>يوتيوب</span></a>
+
+<a class="tile" href="https://x.com/" target="_blank">
+<span class="emoji">𝕏</span><span>X</span></a>
+
+<a class="tile" href="https://snapchat.com/" target="_blank">
+<span class="emoji">👻</span><span>سناب شات</span></a>
+
+<a class="tile" href="https://linkedin.com/" target="_blank">
+<span class="emoji">💼</span><span>لينكدإن</span></a>
+
+<a class="tile" href="https://reddit.com/" target="_blank">
+<span class="emoji">🟠</span><span>ريديت</span></a>
+
+<a class="tile" href="https://discord.com/app" target="_blank">
+<span class="emoji">🎮</span><span>ديسكورد</span></a>
+
+</div>
+
+<h2>محركات البحث والخدمات</h2>
+
+<div class="grid">
+
+<a class="tile" href="https://google.com/" target="_blank">
+<span class="emoji">🔎</span><span>Google</span></a>
+
+<a class="tile" href="https://mail.google.com/" target="_blank">
+<span class="emoji">📧</span><span>Gmail</span></a>
+
+<a class="tile" href="https://maps.google.com/" target="_blank">
+<span class="emoji">🗺️</span><span>Google Maps</span></a>
+
+</div>
+
+<section class="browser">
+
+<div class="browserbar">
+<span id="status">عارض المواقع</span>
+<button onclick="openExternal()">فتح خارجياً</button>
+</div>
+
+<iframe id="view" src="about:blank"></iframe>
+
+</section>
+
+<div class="notice">
+تنبيه: بعض المواقع تمنع العرض داخل الإطار.
+يمكنك فتحها مباشرة من المتصفح الخارجي.
+هذا المشروع واجهة متصفح وليس خادم بروكسي شبكي.
+</div>
+
+</main>
+
+<footer>OMAR PROXY © 2026</footer>
+
+<script>
+
+let currentUrl = "https://www.google.com/";
+
+function startSite() {
+  document.getElementById("intro").classList.add("hide");
+}
+
+function normalize(value) {
+  let q = value.trim();
+
+  if (!q) return "https://www.google.com/";
+
+  if (/^https?:\/\//i.test(q)) return q;
+
+  if (/^[\w-]+\.[a-z]{2,}/i.test(q))
+    return "https://" + q;
+
+  return "https://www.google.com/search?q=" +
+         encodeURIComponent(q);
+}
+
+function navigate(url) {
+  currentUrl = url;
+  document.getElementById("status").textContent = url;
+  document.getElementById("view").src = url;
+}
+
+document.getElementById("searchForm")
+.addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  let value = document.getElementById("address").value;
+  navigate(normalize(value));
+});
+
+function openExternal() {
+  window.open(currentUrl, "_blank", "noopener");
+}
+
+</script>
+
+</body>
+</html>
